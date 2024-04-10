@@ -3,7 +3,7 @@ $tipos_alumnoextranjero = array(
     'alumno' => 'Alumno',
     'externo' => 'Externo'
 );
-$conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+$conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 $nombreArchivo_fichaingreso = ""; // Agrega esta línea para inicializar la variable
 $nombreArchivo_comprobantepago = ""; // Agrega esta línea para inicializar la variable
 if (isset($_GET['txtID'])) {

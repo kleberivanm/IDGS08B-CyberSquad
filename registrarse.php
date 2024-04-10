@@ -7,46 +7,48 @@ $mensaje_error = "";
 
 // Procesar el formulario de agregar
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Obtener los datos del formulario
+    // datos del formulario
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
     $correo = $_POST["correo"];
-    // Establecer el tipo como "alumno"
+    
     $tipo = "alumno";
 
-    // Validación de la contraseña
-    if (strlen($password) < 8 || !preg_match("/[A-Z]/", $password)) {
-        $mensaje_error = "La contraseña debe tener al menos 8 caracteres y al menos una letra mayúscula.";
+    if (!preg_match("/^.{8,}$/", $password)) {
+        $mensaje_error = "La contraseña debe tener al menos 8 caracteres.";
     } else {
-        // Validación del correo electrónico utilizando expresión regular
-        if (!preg_match('/^[A-z0-9\._-]+@[A-z0-9][A-z0-9-]* (\.[A-z0-9_-]+)*\.([A-z]{2,6})$/', $correo)) {
-            $mensaje_error = "Formato de correo electrónico inválido.";
-        } else {
-            // Realizar la conexión a la base de datos (ya incluido en bd.php)
-            // Escapar los valores para evitar inyección de SQL
+        $pattern = '/^[a-zA-Z0-9._%+-]+@gmail\.com$/';
+        if (preg_match($pattern, $correo)) {
+            
+            $conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+            
             $usuario = mysqli_real_escape_string($conexion, $usuario);
             $password = mysqli_real_escape_string($conexion, $password);
             $correo = mysqli_real_escape_string($conexion, $correo);
 
-            // Crear la sentencia SQL de inserción
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
+            
             $sql = "INSERT INTO usuario (usuario, password, correo, tipo) VALUES ('$usuario', '$password', '$correo', '$tipo')";
 
-            // Ejecutar la sentencia SQL
+           
             if (mysqli_query($conexion, $sql)) {
-                // Registro agregado correctamente
+                
                 $mensaje_exito = "El registro se agregó correctamente.";
-                // Obtener el ID del usuario registrado
+                
                 $id_usuario = mysqli_insert_id($conexion);
-                // Guardar el ID en una variable de sesión
+                
                 $_SESSION["id_usuario"] = $id_usuario;
             } else {
-                // Error al ejecutar la sentencia SQL
-                $mensaje_error = "Error al agregar el registro: " . mysqli_error($conexion);
+                
+                $mensaje_error = "Error al agregar el registro.";
             }
+        } else {
+            $mensaje_error = "Formato de correo electrónico inválido.";
         }
     }
 
-    // Cerrar la conexión a la base de datos (ya incluido en bd.php)
+    
     mysqli_close($conexion);
 }
 ?>
@@ -113,10 +115,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <input type="password" name="password" class="form-control" required>
          <?php if (!empty($mensaje_error) && strlen($password) < 8): ?>
             <p class="text-danger">La contraseña debe tener al menos 8 caracteres.</p>
-         <?php elseif (!empty($mensaje_error) && !preg_match("/[A-Z]/", $password)): ?>
-            <p class="text-danger">La contraseña debe contener al menos una letra mayúscula.</p>
          <?php endif; ?>
-           <!-- Icono para mostrar/ocultar la contraseña -->
+           
            <button type="button" onclick="mostrarContrasena()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
             <i class="fas fa-eye"></i>
         </button>
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      
 </form>
 
-<!-- Mostrar mensaje de éxito -->
+
 <?php
 if (!empty($mensaje_exito)) {
     echo "<p class='text-success'>$mensaje_exito</p>";

@@ -1,6 +1,6 @@
 <?php include("../../templates/header.php"); ?>
 <?php
-$conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+$conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 if (!$conexion) {
     die("Error de conexión a la base de datos: " . mysqli_connect_error());
 }

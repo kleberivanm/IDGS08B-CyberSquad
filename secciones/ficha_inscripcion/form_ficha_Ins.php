@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+$conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Obtener los datos del formulario

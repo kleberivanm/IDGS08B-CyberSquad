@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+$conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['txtID'])) {
     $txtID = $_GET['txtID'];
     $sentencia = $conexion->prepare("DELETE FROM usuario WHERE id = ?");

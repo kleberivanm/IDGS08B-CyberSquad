@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+$conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 use function unlink;
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['idNuevoIngreso'])) {

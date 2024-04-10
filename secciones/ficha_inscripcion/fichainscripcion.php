@@ -5,9 +5,7 @@ $url_base = "http://localhost/Sabatinos/";
 
 // Verificar si el usuario ha iniciado sesión y si es un alumno
 if (isset($_SESSION["usuario"]) && $_SESSION["tipo"] === "alumno") {
-  // Obtén la ID de la ficha de inscripción desde la sesión
-
-  // Resto de tu código aquí...
+  
 
 } else {
   // El usuario no ha iniciado sesión o no es un alumno, redirige a la página de inicio de sesión

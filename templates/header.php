@@ -1,7 +1,7 @@
 <?php
 // Reanudar la sesión existente
 session_start();
-$url_base = "http://localhost/Sabatinos/";
+$url_base = "https://organic-space-spork-v9gpgj99rv72vrv-8080.app.github.dev/";
 
 if (isset($_SESSION["usuario"]) && $_SESSION["tipo"] === "alumno") {
   $id_usuario = $_SESSION['id']; // Asegúrate de que esta sesión exista
@@ -12,7 +12,7 @@ if (isset($_SESSION["usuario"]) && $_SESSION["tipo"] === "alumno") {
   $id = isset($_SESSION['id']) ? $_SESSION['id'] : "";
 
   // Mover el bloque de código que recupera los datos de la base de datos aquí
-  $conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+  $conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
 
   $sentencia = $conexion->prepare("SELECT * FROM usuario WHERE id = ?");
   $sentencia->bind_param("i", $id);

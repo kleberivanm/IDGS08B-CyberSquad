@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $periodo = $_POST["periodo"];
   $año = $_POST["año"];
   
-  $conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+  $conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
   $grupo = mysqli_real_escape_string($conexion, $grupo);
   $grado = mysqli_real_escape_string($conexion, $grado);
   $año = mysqli_real_escape_string($conexion, $año);

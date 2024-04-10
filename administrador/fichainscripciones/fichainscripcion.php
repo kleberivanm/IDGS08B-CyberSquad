@@ -16,7 +16,7 @@ if (isset($_SESSION["usuario"]) && $_SESSION["tipo"] === "administrador") {
 }
   
 $dsn = "mysql:host=localhost;dbname=sabaticos;charset=utf8mb4";
-$usuario = "root";
+$usuario = "mariadb";
 $contraseña = "";
 
 try {

@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $correo = $_POST["correo"];
   $tipo = $_POST["tipo"];
   // Realizar la conexión a la base de datos
-  $conexion = mysqli_connect("localhost", "root", "", "sabaticos");
+  $conexion = mysqli_connect("db", "mariadb", "mariadb", "mariadb");
   // Escapar los valores para evitar inyección de SQL
   $usuario = mysqli_real_escape_string($conexion, $usuario);
   $password = mysqli_real_escape_string($conexion, $password);
